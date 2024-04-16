@@ -7,15 +7,14 @@ import clients from "./src/controllers/clients.js";
 import user from "./src/controllers/user.js"; //importar user para o login
 import auth  from './src/middlewares/auth.js'; // midware para verificar autenticaçao
 import dbsync from "./src/controllers/dbUpdate.js";
+import chatwoot from "./src/models/chatwoot/conectionApi.js"
 
 const routes = express.Router();
-// //swagger
-// routes.use('/api-docs', swaggerUi.serve);//swagger
-// routes.get('/api-docs', swaggerUi.setup(swaggerDocs));//swagger
 
 routes.get("/exemplo", auth.checkUser, clients.findAll);//importa a rota de controller com midware
 
 //rotas publicas
+routes.get("/teste", chatwoot);//importa a dados de agentes chatwoot
 
 //rotas login
 routes.post("/login", user.login);//importa a rota de login
