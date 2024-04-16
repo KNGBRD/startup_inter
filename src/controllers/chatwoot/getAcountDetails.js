@@ -2,7 +2,7 @@ async function getAccount(req, res) {
     const id_account = 4;
     // const url = `${process.env.API_URL}`/platform/api/v1/accounts/`${id_account}`
     const url = 'https://chatdevelop.zapys.com.br/platform/api/v1/accounts/1'
-    const api_access_token = 'CB4c3Jvt2grpTzJAbbaPbo6i';
+    const api_access_token = 'BdJCBtjQNbTi5RR5NNSUtdXc';
 
     try {
         const response = await fetch(url, {

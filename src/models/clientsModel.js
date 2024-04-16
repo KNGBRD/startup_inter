@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize";
+import  DataTypes  from "sequelize";
 import db from "../db.js";
 import user from "./userModel.js";
 
@@ -30,16 +30,16 @@ export default db.define("client", {
     allowNull: true,
     comment: "telefone do cliente",
   },
-  id_conta_cw: {
+  id_account_cw: {
     type: DataTypes.INTEGER.UNSIGNED,
     allowNull: true,
     comment: "id do cliente no chatwoot",
   },
   user_id: {
-    type: DataTypes.INTEGER.UNSIGNED,
+    type: DataTypes.STRING,
     allowNull: true,
     comment: "id do usuario que cadastrou o cliente",
-  },
+  }
 });
 
 //verificar uso de client e a chamada dele para definir as relaçoes
