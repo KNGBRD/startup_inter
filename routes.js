@@ -10,6 +10,8 @@ import dbsync from "./src/controllers/dbUpdate.js";
 
 import agentsAcount from "./src/controllers/chatwoot/agentsAcount.js";
 
+import loginteste from "./src/controllers/views/loginPage.js";
+
 const routes = express.Router();
 
 routes.get("/exemplo", auth.checkUser, clients.findAll);//importa a rota de controller com midware
@@ -30,6 +32,10 @@ routes.post("/clients",  clients.addClient);
 routes.get("/clients/:id",  clients.findClient);
 routes.put("/clients/:id",  clients.updateClient);
 routes.delete("/clients/:id",  clients.deleteClient);
+
+//rotas de viwes
+// routes.get("/view", clients.viewAll);
+routes.get('/login_teste',loginteste); 
 
 
 //rota para sincronizar banco de dados somente para usuario root

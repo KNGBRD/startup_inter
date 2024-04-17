@@ -41,7 +41,7 @@ async function postNewAgent(req, res) {
             email: req.body.email,
             role: req.body.role,
             availability_status: req.body.availability_status,
-            auto_offline: "true"
+            auto_offline: auto_offline
     };
 
     try {
@@ -118,8 +118,7 @@ async function deleteAgent(req, res){
             method: 'DELETE',
             headers: {
                 'api_access_token': user_api_key                
-            }
-            
+            }            
         });
 
         if (!response.ok) {
