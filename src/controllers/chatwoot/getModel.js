@@ -1,6 +1,6 @@
 async function getAccountUsers(req, res) {
     const id_account = 4;
-    const url = `${process.env.API_URL}`/platform/api/v1/accounts/`${id_account}`/account_users;
+    const url = `${process.env.API_URL}/platform/api/v1/accounts/${id_account}/account_users`;
     const api_access_token = process.env.API_TOKEN;
 
     try {

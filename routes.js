@@ -8,7 +8,7 @@ import user from "./src/controllers/user.js"; //importar user para o login
 import auth  from './src/middlewares/auth.js'; // midware para verificar autenticaçao
 import dbsync from "./src/controllers/dbUpdate.js";
 
-import agentsAcount from "./src/controllers/chatwoot/agentsAcount.js";
+import agentsAcount from "./src/controllers/chatwoot/application/agentsAcount.js";
 
 import loginteste from "./src/controllers/views/loginPage.js";
 

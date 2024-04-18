@@ -1,6 +1,3 @@
-
-
-
 async function getAgents(req, res) {
     const id_account = req.params.id;
 
