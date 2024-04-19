@@ -39,7 +39,7 @@ routes.get('/login_teste',loginteste);
 
 
 //rota para sincronizar banco de dados somente para usuario root
-routes.post("/db/sync", auth.checkAdmin, dbsync);
+routes.post("/db/sync", dbsync);
 
 //rorta para saber se a aplicação está rodando
 routes.get("/", (req, res) => {

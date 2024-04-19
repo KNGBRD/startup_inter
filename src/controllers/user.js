@@ -2,7 +2,7 @@ import UserRepository from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 import env from "dotenv/config";
-import e from "express";
+//import e from "express";
 // import dotenv from "dotenv/config.js"; 
 
 
