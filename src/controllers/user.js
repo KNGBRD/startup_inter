@@ -9,7 +9,7 @@ import env from "dotenv/config";
 async function login(req, res) {
     //valida dados de login
     const user = await UserRepository.findOne({
-        attributes: ['id', 'name', 'email', 'password','permission','id_account', 'user_api_key'],
+        attributes: ['id', 'name', 'email', 'password','permission'],
         where: {
             email: req.body.email
         }
@@ -32,7 +32,7 @@ async function login(req, res) {
     }
 
     //cria o token
-    var token = jwt.sign({id: user.id, name: user.name, permission: user.permission, id_account: user.id_account}, `${process.env.JWT_PRIVATE_KEY}`, {
+    var token = jwt.sign({id: user.id, name: user.name, permission: user.permission}, `${process.env.JWT_PRIVATE_KEY}`, {
         //expiresIn: 600 //10 min
         // expiresIn: 60 //1 min
         // expiresIn: '10m'
