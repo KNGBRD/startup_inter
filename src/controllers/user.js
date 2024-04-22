@@ -9,7 +9,7 @@ import env from "dotenv/config";
 async function login(req, res) {
     //valida dados de login
     const user = await UserRepository.findOne({
-        attributes: ['id', 'name', 'email', 'password','permission'],
+        attributes: ['id', 'name', 'email', 'password','permission','id_account', 'user_api_key'],
         where: {
             email: req.body.email
         }
@@ -32,7 +32,7 @@ async function login(req, res) {
     }
 
     //cria o token
-    var token = jwt.sign({id: user.id, name: user.name, permission: user.permission}, `${process.env.JWT_PRIVATE_KEY}`, {
+    var token = jwt.sign({id: user.id, name: user.name, permission: user.permission, id_account: user.id_account}, `${process.env.JWT_PRIVATE_KEY}`, {
         //expiresIn: 600 //10 min
         // expiresIn: 60 //1 min
         // expiresIn: '10m'
@@ -76,9 +76,16 @@ async function singUp(req,res){
         });
     }
 
-    //encripta a senha 
-    if (dados.password === req.body.confirm_password) dados.password = await bcrypt.hash(dados.password, 8);
-    console.log('SENHA encriptados: ', dados); //teste
+    //compara e encripta a senha 
+    if (dados.password === req.body.confirm_password){
+        dados.password = await bcrypt.hash(dados.password, 8);
+        console.log('SENHA encriptados: ', dados); //teste
+    }else{
+        return res.status(400).json({
+            erro: true,
+            mensagem: "Erro: As senhas não conferem!"
+        });
+    }
 
     try{
         await UserRepository.create(dados);
@@ -92,32 +99,17 @@ async function singUp(req,res){
             erro: true,
             mensagem: "Erro: Usuário não cadastrado!"
         });
-    }
-
-    // //cria o usuario
-    // await UserRepository.create(dados)
-    // .then(() => {
-    //     return res.status(200).json({
-    //         erro: false,
-    //         mensagem: "Usuário cadastrado com sucesso!"
-    //     });
-    // }).catch(() => {        
-    //     return res.status(400).json({
-    //         erro: true,
-    //         mensagem: "Erro: Usuário não cadastrado!"
-    //     });
-    // });
+    }     
 }
 
 async function updateUser(req, res) {
-    const dados = {};
+    const dados = {};//verificar se tem que construir ou se assim funciona
     if (req.body.new_name) dados.name = req.body.new_name;
-    // if (req.body.email) dados.email = req.body.email;
     if (req.body.password === req.body.confirm_password) dados.password = await bcrypt.hash(req.body.password, 8);    
     
     await UserRepository.update(dados, {
         where: {
-            id: req.body.id
+            id: req.body.user_email
         }
     }).then(() => {
         return res.status(200).json({

@@ -16,6 +16,9 @@ export default db.define("user", {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        isEmail: true,
+      },
     },
     password: {
       type: DataTypes.STRING,
@@ -25,7 +28,15 @@ export default db.define("user", {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "user"
-    }    
+    },
+    id_account: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    user_api_key: {   
+      type: DataTypes.STRING,
+      allowNull: true,
+    } 
   });
 //Criar a tabela
 //db.sync();

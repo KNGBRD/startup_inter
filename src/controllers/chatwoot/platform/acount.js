@@ -1,10 +1,11 @@
 async function createAccount(req, res){
+    //POST method
     //const id_account = req.params.id_account;
     //const id_user = req.params.id;
     const name_account = req.body.name_account;
     const url = `${process.env.API_URL}platform/api/v1/accounts`;
-    // const user_api_key =req.params.body.user_token;
-    const user_api_key = '4xRmXYqdVCo9H3Xa51ahpxNs';//remover depois
+    const aplication_api_key =req.headers.aplication_token;
+    
     const userData = {
         name: name_account
     };
@@ -14,7 +15,7 @@ async function createAccount(req, res){
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'api_access_token': user_api_key,                
+                'api_access_token': aplication_api_key,                
             },
             body: JSON.stringify(userData) // Aqui é onde você insere os dados do corpo
         });

@@ -8,7 +8,9 @@ import user from "./src/controllers/user.js"; //importar user para o login
 import auth  from './src/middlewares/auth.js'; // midware para verificar autenticaçao
 import dbsync from "./src/controllers/dbUpdate.js";
 
-import agentsAcount from "./src/controllers/chatwoot/application/agentsAcount.js";
+import chatAgents from "./src/controllers/chatwoot/application/agentsAcount.js";
+import chatInbox from "./src/controllers/chatwoot/application/inboxes.js";
+
 
 import loginteste from "./src/controllers/views/loginPage.js";
 
@@ -16,9 +18,16 @@ const routes = express.Router();
 
 routes.get("/exemplo", auth.checkUser, clients.findAll);//importa a rota de controller com midware
 
-//rotas chatwoot
-routes.get("/teste/:id", agentsAcount.getAgents);//importa a dados de agentes chatwoot
-// routes.get("/teste2", chatwoot);//importa a dados de agentes chatwoot
+//rotas chat Agents
+routes.get("/chat/agents/:id_account", chatAgents.listAgentsInAccout);
+routes.post("/chat/agents/:id_account", chatAgents.addNewAgent);
+routes.patch("/chat/agents/:id_account/:id_agent", chatAgents.updateAgent);
+routes.delete("/chat/agents/:id_account/:id_agent", chatAgents.deleteAgent);
+//rotas chat Inbox
+routes.get("/chat/inbox/:id_account", chatInbox.listAgentInbox);//lista todas as caixas de entrada de uma conta
+routes.get("/chat/inbox/:id_account/:id_inbox", chatInbox.listAgentInbox);//lista agentes de uma caixa de entrada
+routes.post("/chat/inbox/:id_account/:id_inbox", chatInbox.addAgentInbox);//adiciona um agente a uma caixa de entrada
+routes.delete("/chat/inbox/:id_account/:id_inbox", chatInbox.deleteAgentInbox);//remove um agente de uma caixa de entrada
 
 //rotas login
 routes.post("/login", user.login);//importa a rota de login
