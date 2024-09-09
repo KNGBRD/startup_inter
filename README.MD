@@ -1,5 +1,6 @@
 Instalar todas as dependencias indicada pelo package.json
-### npm install express nodemon bcrypt jsonwebtoken sequelize mysql2 cors
+### npm install express nodemon bcrypt jsonwebtoken sequelize cors
+### npm install pg pg-hstore
 
 Criar a base de dados
 ### CREATE DATABASE site_teste CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -15,5 +16,6 @@ DB_NAME=nome_do_database
 DB_USER=usuario_do_banco
 DB_PASSWORD=Senha_do_banco
 DB_HOST=endereço_do_banco
+DB_PORT=5432_porta_padrão_do_PostgreSQL
 PORT=5000
 JWT_PRIVATE_KEY=chave_para_jwt
