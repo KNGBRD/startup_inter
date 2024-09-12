@@ -75,6 +75,18 @@ async function addNewAgent(req, res) {
     }
 }
 
+/**
+ * The function `updateAgent` is an asynchronous function that updates agent information in an account
+ * using a PATCH request with validations for user token, account ID, agent ID, and agent data.
+ * @param req - `req` is the request object that contains information about the HTTP request made to
+ * the server. It includes data such as parameters, headers, body, and other details sent by the client
+ * to the server. In the provided code snippet, `req` is used to extract parameters like `id_account`
+ * @param res - The `res` parameter in the `updateAgent` function is the response object that will be
+ * used to send back the response to the client making the request. It is typically used to set the
+ * status code and send data back to the client in the form of JSON or other formats. In this function
+ * @returns a JSON response with the updated data of the agent in the account if the request is
+ * successful. If there is an error during the request, it will log an error message to the console.
+ */
 async function updateAgent(req, res){
     //PATCH update agent in account
     const id_account = req.params.id_account;
@@ -126,6 +138,19 @@ async function updateAgent(req, res){
     }
 }
 
+/**
+ * This function deletes an agent in an account by sending a DELETE request to the specified API
+ * endpoint with the user's API access token.
+ * @param req - The `req` parameter in the `deleteAgent` function is an object that represents the HTTP
+ * request. It contains information about the request made to the server, such as request headers,
+ * parameters, body, and other details. In this function, `req` is used to extract the `id_account
+ * @param res - The `res` parameter in the `deleteAgent` function is the response object that will be
+ * used to send a response back to the client making the request. It is typically used to send HTTP
+ * responses with status codes and data back to the client. In this function, `res` is used to
+ * @returns a JSON response with the data of the deleted agent if the deletion was successful. If there
+ * is an error during the deletion process or while making the request, an error message will be logged
+ * to the console.
+ */
 async function deleteAgent(req, res){
     //DELETE delete agent in account
     const id_account = req.params.id_account;

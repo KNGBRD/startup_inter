@@ -5,7 +5,7 @@ import user from "./userModel.js";
 //adicionar mais dados para clientes consorcios
 export default db.define("client", {
   id: {
-    type: DataTypes.INTEGER.UNSIGNED,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     allowNull: false,
@@ -31,7 +31,7 @@ export default db.define("client", {
     comment: "telefone do cliente",
   },
   id_account_cw: {
-    type: DataTypes.INTEGER.UNSIGNED,
+    type: DataTypes.INTEGER,
     allowNull: true,
     comment: "id do cliente no chatwoot",
   },

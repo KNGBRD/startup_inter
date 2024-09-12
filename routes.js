@@ -16,8 +16,6 @@ import loginteste from "./src/controllers/views/loginPage.js";
 
 const routes = express.Router();
 
-routes.get("/exemplo", auth.checkUser, clients.findAll);//importa a rota de controller com midware
-
 //rotas chat Agents
 routes.get("/chat/agents/:id_account", chatAgents.listAgentsInAccout);
 routes.post("/chat/agents/:id_account", chatAgents.addNewAgent);
@@ -30,10 +28,10 @@ routes.post("/chat/inbox/:id_account/:id_inbox", chatInbox.addAgentInbox);//adic
 routes.delete("/chat/inbox/:id_account/:id_inbox", chatInbox.deleteAgentInbox);//remove um agente de uma caixa de entrada
 
 //rotas login
-routes.post("/login", user.login);//importa a rota de login
+routes.post("/login", user.login);//Rota de login
 routes.post("/signup", user.singUp);//importa a rota de singup cadastrar novo usuario
-routes.patch("/user/update", auth.checkUser, user.updateUser);//atualiza nome e senha do usuario
-routes.patch("/user/update_permission", auth.checkUser, user.updatePermission);//atualiza permissao de usuario para admin
+routes.patch("/user/update", auth.hasPermission('root'), user.updateUser);//atualiza nome e senha do usuario
+routes.patch("/user/update_permission", auth.hasPermission('root'), user.updatePermission);//atualiza permissao de usuario para admin
 
 //rotas clientes
 routes.get("/clients",  clients.findAll);
@@ -42,13 +40,20 @@ routes.get("/clients/:id",  clients.findClient);
 routes.put("/clients/:id",  clients.updateClient);
 routes.delete("/clients/:id",  clients.deleteClient);
 
+//rotas de testes
+//rota para teste de permissão de usuario
+routes.get("/teste",auth.hasPermission('read'), (req, res) => {
+  res.json({ message: 'permissao funcionando' });
+});
+
+
 //rotas de viwes
 // routes.get("/view", clients.viewAll);
 routes.get('/login_teste',loginteste); 
 
 
 //rota para sincronizar banco de dados somente para usuario root
-routes.post("/db/sync", dbsync);
+routes.post("/db/sync",auth.hasPermission('root'), dbsync);
 
 //rorta para saber se a aplicação está rodando
 routes.get("/", (req, res) => {

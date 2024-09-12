@@ -1,42 +1,6 @@
 import jwt from 'jsonwebtoken';
+import rolesPermissions from './../controllers/permission.js';
 
-
-// function authlogin(req, res, next){
-//     const authHeader = req.headers.authorization;
-//     if(!authHeader){           
-//         return res.status(401).json({
-//             erro: true,
-//             mensagem: "Erro: Necessário realizar o login para acessar a página! Faltam o token A!"                
-//         });
-//     }
-//     const [, token ]= authHeader.split(' ');        
-//     if(!token){
-//         return res.status(401).json({ 
-//             erro: true,
-//             mensagem: "Erro: Necessário realizar o login para acessar a página! Faltam o token B!"
-//         });
-//     }
-
-//     try{
-//         const decode = jwt.verify(token, `${process.env.JWT_PRIVATE_KEY}`);
-//         if(decode.permission == "user" || decode.permission == "admin"){
-//             req.body.id = decode.id;
-//             req.body.name = decode.name;
-//             return next();
-//             }else{
-//                 return res.status(401).json({
-//                     erro: true,
-//                     mensagem: "Erro: Você não tem permissão para acessar essa página!"
-//                 });
-//             }
-//     }catch(err){
-//         return res.status(401).json({
-//             erro: true,
-//             mensagem: "Erro: Necessário realizar o login para acessar a página! Token inválido ou expirado!"
-//         });
-//     }
-
-// };
 
 
 function authlogin(req, res){
@@ -72,31 +36,21 @@ function authlogin(req, res){
 };
 
 
-
-function checkUser(req, res, next){
-    const checkAuth = authlogin(req, res);
-
-    if(checkAuth.permission == "user"){      
-        return next();
-    }else{        
-        return res.status(401).json({
+function hasPermission(requiredPermission) {
+    
+    return function(req, res, next) {
+        const checkAuth = authlogin(req,res);//faz o decode do token
+        const role = checkAuth.permission;//pega a permissão do usuario
+  
+      if (!role || !rolesPermissions[role]?.includes(requiredPermission)) {
+        return res.status(403).json({
             erro: true,
-            mensagem: "Erro: Você não tem permissão para acessar essa página!"
-        });
-    }
-}
+            mensagem: 'Erro:Permissão negada' });
+      }else{
+        next();//usuario tem permissão
+      }
+      
+    };
+  }
 
-function checkAdmin(req, res, next){
-    const checkAuth = authlogin(req,res);
-
-    if(checkAuth.permission == "user" || checkAuth.permission == "admin"){        
-        return next();
-    }else{
-        return res.status(401).json({
-            erro: true,
-            mensagem: "Erro: Você não tem permissão para acessar essa página!"
-        });
-    }
-}
-
-export default {checkAdmin, checkUser};
+export default { hasPermission};
