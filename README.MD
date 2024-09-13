@@ -1,18 +1,18 @@
-# Projeto Site Teste
+# Projeto Backenf Startup 
 
-## Instalação de Dependências
+### Instalação de Dependências
 
 Para instalar todas as dependências indicadas no `package.json`, execute o seguinte comando:
 
 npm install express nodemon bcrypt jsonwebtoken sequelize cors pg pg-hstore
 
-## Executar o Projeto
+### Executar o Projeto
 
 Para rodar o projeto usando o nodemon, utilize o comando:
 
 npm run dev
 
-## Configuração do Arquivo .env
+### Configuração do Arquivo .env
 
 O projeto possui configurações no arquivo .env, que devem incluir os seguintes dados:
 
@@ -24,4 +24,5 @@ DB_PORT=5432
 PORT=5000
 JWT_PRIVATE_KEY=sua_chave_jwt
 
-Nota: O valor de JWT_PRIVATE_KEY deve ser gerado e utilizado para assinar os tokens JWT.
+> [!NOTE]
+> O valor de JWT_PRIVATE_KEY deve ser gerado e utilizado para assinar os tokens JWT.
