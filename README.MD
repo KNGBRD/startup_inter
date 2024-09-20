@@ -1,21 +1,28 @@
-Instalar todas as dependencias indicada pelo package.json
-### npm install express nodemon bcrypt jsonwebtoken sequelize cors
-### npm install pg pg-hstore
+# Projeto Backenf Startup 
 
-Criar a base de dados
-### CREATE DATABASE site_teste CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+### Instalação de Dependências
 
-Rodar o projeto usando o nodemon 
-### npm run dev
+Para instalar todas as dependências indicadas no `package.json`, execute o seguinte comando:
 
+npm install express nodemon bcrypt jsonwebtoken sequelize cors pg pg-hstore
 
-O projeto possui configuraçoes em um arquivo .env, que possi os dados a baixo
-em JWT_PRIVATE_KEY deve ser gerada uma chave para o JWT
+### Executar o Projeto
+
+Para rodar o projeto usando o nodemon, utilize o comando:
+
+npm run dev
+
+### Configuração do Arquivo .env
+
+O projeto possui configurações no arquivo .env, que devem incluir os seguintes dados:
 
 DB_NAME=nome_do_database
 DB_USER=usuario_do_banco
-DB_PASSWORD=Senha_do_banco
-DB_HOST=endereço_do_banco
-DB_PORT=5432_porta_padrão_do_PostgreSQL
+DB_PASSWORD=senha_do_banco
+DB_HOST=endereco_do_banco
+DB_PORT=5432
 PORT=5000
-JWT_PRIVATE_KEY=chave_para_jwt
+JWT_PRIVATE_KEY=sua_chave_jwt
+
+> [!NOTE]
+> O valor de JWT_PRIVATE_KEY deve ser gerado e utilizado para assinar os tokens JWT.
