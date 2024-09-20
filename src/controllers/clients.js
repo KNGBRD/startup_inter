@@ -1,4 +1,4 @@
-import ClientRepository from "../models/clientsModel.js";
+import ClientRepository from "../models/client.js";
 
 function findAll(req, res) {
   ClientRepository.findAll().then((result) => res.status(200).json(result));

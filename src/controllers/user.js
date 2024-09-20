@@ -130,7 +130,7 @@ async function updatePermission(req, res) {
     if (req.body.new_permission) dados.permission = req.body.new_permission;
     if(!req.body.user_email) return res.status(400).json({erro: true, mensagem: "Erro: Email do usuário não informado!"});
        
-    if (dados.permission === 'admin' || dados.permission === 'user'){  
+    if (dados.permission === 'admin' || dados.permission === 'user'|| dados.permission === 'root'){  
         await UserRepository.update(dados, {
             where: {
                 email: req.body.user_email

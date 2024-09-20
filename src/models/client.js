@@ -1,6 +1,5 @@
 import  DataTypes  from "sequelize";
 import db from "../db.js";
-import user from "./userModel.js";
 
 //adicionar mais dados para clientes consorcios
 export default db.define("client", {
@@ -10,15 +9,9 @@ export default db.define("client", {
     autoIncrement: true,
     allowNull: false,
   },
-  nome: {
+  nome_da_empresa: {
     type: DataTypes.STRING,
     allowNull: false,
-  },  
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-    comment: "email do cliente",
   },
   telefone: {
     type: DataTypes.STRING,
@@ -28,18 +21,15 @@ export default db.define("client", {
   telefone2: {
     type: DataTypes.STRING,
     allowNull: true,
-    comment: "telefone do cliente",
-  },
-  id_account_cw: {
+    comment: "telefone do cliente (opcional)",
+  },  
+  user_id: {
     type: DataTypes.INTEGER,
     allowNull: true,
-    comment: "id do cliente no chatwoot",
-  },
-  user_id: {
-    type: DataTypes.STRING,
-    allowNull: true,
+    foreginKey: true,
     comment: "id do usuario que cadastrou o cliente",
-  }
+  },
+  
 });
 
 //verificar uso de client e a chamada dele para definir as relaçoes
