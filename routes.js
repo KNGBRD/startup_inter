@@ -29,8 +29,9 @@ routes.delete("/chat/inbox/:id_account/:id_inbox", chatInbox.deleteAgentInbox);/
 
 //rotas login
 routes.post("/login", user.login);//Rota de login
-routes.post("/signup", user.singUp);//importa a rota de singup cadastrar novo usuario
-routes.patch("/user/update", auth.hasPermission('root'), user.updateUser);//atualiza nome e senha do usuario
+routes.post("/signup", user.singUp);//Cadastrar novo usuario
+routes.post("/user/update_password", auth.hasPermission('funcionario'), user.updateUserPassword);//atualiza senha do usuario
+routes.post("/user/update_name", auth.hasPermission('funcionario'), user.updateNameUser);//atualiza nome do usuario
 routes.patch("/user/update_permission", auth.hasPermission('root'), user.updatePermission);//atualiza permissao de usuario para admin
 
 //rotas clientes

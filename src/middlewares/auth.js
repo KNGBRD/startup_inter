@@ -53,4 +53,8 @@ function hasPermission(requiredPermission) {
     };
   }
 
-export default { hasPermission};
+function checkPermission(requiredPermission, role) {
+    return rolesPermissions[role]?.includes(requiredPermission);
+}
+
+export default { hasPermission, checkPermission};
