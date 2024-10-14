@@ -8,14 +8,26 @@ export default db.define("acount_configs", {
         autoIncrement: true,
         allowNull: false,
     },
-    evolution_api_global_api_key: {
+    evolution_api_global_key: {
         type: DataTypes.STRING,
         allowNull: false,
         comment: "chave de acesso global do sistema evolution",
     },
-    chatwoor_platarform_api_key: { 
+    evolution_url: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "https://apidevelop.zapys.com.br",
+        comment: "url de acesso global do sistema evolution",
+    },
+    chatwoot_platform_api_key: { 
         type: DataTypes.STRING,
         allowNull: false,
         comment: "chave de acesso global do sistema chatwoot",
     },
+    chatwoot_url: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "https://chat.zapys.com.br",
+        comment: "url de acesso global do sistema chatwoot",
+    }
 });

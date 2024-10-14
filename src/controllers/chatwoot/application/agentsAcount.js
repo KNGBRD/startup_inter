@@ -1,19 +1,51 @@
+import ChatWootUserConfigs from './../../acoutConfigs.js';
+
+// async function listAgentsInAccout(req, res) {
+//     const chatwootData = await ChatWootUserConfigs.getUserConfigs(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
+//     //get agents in account
+//     const id_account = req.params.id_account;
+//     const url = `${chatwootData.url_chatwoot}/api/v1/accounts/${id_account}/agents`;
+//     console.log(url);//teste
+
+//     const user_api_key =req.headers.user_token;
+//     if (!user_api_key) return res.status(401).json({error: 'Token de usuario não informado!'});
+//     if (!id_account) return res.status(400).json({error: 'Id da conta não informado!'});
+
+//     try {
+//         const response = await fetch(url, {
+//             method: 'GET',
+//             headers: {
+//                 'Content-Type': 'application/json; charset=utf-8',
+//                 'api_access_token': user_api_key
+//             }
+//         });
+
+//         if (!response.ok) {
+//             console.log(response.status);//teste
+//             throw new Error(`HTTP error! status: ${response.status}`);
+//         }
+//         const data = await response.json();     
+//         console.log(data);//teste
+//         return res.status(200).json(data);//verificar o que vai passar no futuro
+//     } catch (error) {
+//         console.error(`Erro ao fazer a requisição: ${error}`);
+//         return res.status(500).json({error: error});
+//     }
+// }
+
 async function listAgentsInAccout(req, res) {
+    const chatwootData = await ChatWootUserConfigs.getUserConfigs(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
     //get agents in account
-    const id_account = req.params.id_account;
-    const url = `${process.env.API_URL}/api/v1/accounts/${id_account}/agents`;
+    const id_account = chatwootData.id_account_chatwoot;
+    const url = `${chatwootData.url_chatwoot}/api/v1/accounts/${id_account}/agents`;
     console.log(url);//teste
-   
-    const user_api_key =req.headers.user_token;
-    if (!user_api_key) return res.status(401).json({error: 'Token de usuario não informado!'});
-    if (!id_account) return res.status(400).json({error: 'Id da conta não informado!'});
 
     try {
         const response = await fetch(url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
-                'api_access_token': user_api_key
+                'api_access_token': chatwootData.user_chatwoot_token
             }
         });
 
@@ -21,35 +53,33 @@ async function listAgentsInAccout(req, res) {
             console.log(response.status);//teste
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data = await response.json();     
+        const data = await response.json();
         console.log(data);//teste
         return res.status(200).json(data);//verificar o que vai passar no futuro
     } catch (error) {
         console.error(`Erro ao fazer a requisição: ${error}`);
-        return res.status(500).json({error: error});
+        return res.status(500).json({ error: error });
     }
 }
 
 async function addNewAgent(req, res) {
+    const chatwootData = await ChatWootUserConfigs.getUserConfigs(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
     //POST add new agent in account
-    const id_account = req.params.id_account;
-    const url = `${process.env.API_URL}/api/v1/accounts/${id_account}/agents`;
-    const user_api_key =req.headers.user_token;
+    const id_account = chatwootData.id_account_chatwoot;
+    const url = `${chatwootData.url_chatwoot}/api/v1/accounts/${id_account}/agents`;
+    const user_api_key = chatwootData.user_chatwoot_token;
 
-    if (!user_api_key) return res.status(401).json({error: 'Token de usuario não informado!'});
-    if (!id_account) return res.status(400).json({error: 'Id da conta não informado!'});
-     
     //valida userData, status e auto_offline nao sao obrigatorios
-    if (!req.body.name || !req.body.name ) return res.status(400).json({error: 'Nome ou email do agente não informado!'});
+    if (!req.body.name || !req.body.email) return res.status(400).json({ error: 'Nome ou email do agente não informado!' });
     req.body.role === (req.body.role === 'admin' || req.body.role === 'agent') ? req.body.role : 'agent';
     req.body.availability_status === (req.body.availability_status === 'available' || req.body.availability_status === 'busy' || req.body.availability_status === 'offline') ? req.body.availability_status : 'available';
     typeof req.body.auto_offline === 'boolean' ? req.body.auto_offline : true;
     const userData = {
-            name: req.body.name,
-            email: req.body.email,
-            role: req.body.role,
-            availability_status: req.body.availability_status,
-            auto_offline: auto_offline
+        name: req.body.name,
+        email: req.body.email,
+        role: req.body.role,
+        availability_status: req.body.availability_status,
+        auto_offline: auto_offline
     };
 
     try {
@@ -57,17 +87,17 @@ async function addNewAgent(req, res) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
-                'api_access_token': user_api_key,                
+                'api_access_token': user_api_key,
             },
             body: JSON.stringify(userData) // Dados do body
         });
 
         if (!response.ok) {
             console.log(response.status);//teste
-            throw new Error(`HTTP error! status: ${response.status}`);            
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data = await response.json();        
+        const data = await response.json();
         console.log(data);//teste
         return res.status(200).json(data);
     } catch (error) {
@@ -75,28 +105,24 @@ async function addNewAgent(req, res) {
     }
 }
 
-async function updateAgent(req, res){
+async function updateAgent(req, res) {
     //PATCH update agent in account
-    const id_account = req.params.id_account;
+    const chatwootData = await ChatWootUserConfigs.getUserConfigs(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
+    const id_account = chatwootData.id_account_chatwoot;
     const id_agent = req.params.id_agent;// id of agent updated
-    const url = `${process.env.API_URL}/api/v1/accounts/${id_account}/agents/${id_agent}`;
-    const user_api_key =req.headers.user_token;
-    
+    const url = `${chatwootData.url_chatwoot}/api/v1/accounts/${id_account}/agents/${id_agent}`;
+    const user_api_key = ChatWootUserConfigs.user_chatwoot_token;
+
     //validaçoes
-    if (!user_api_key) return res.status(401).json({error: 'Token de usuario não informado!'});
-    if (!id_account) return res.status(400).json({error: 'Id da conta não informado!'});
-    if (!id_agent) return res.status(400).json({error: 'Id do agente não informado!'});
-    if (!req.body.role || !req.body.availability || !req.body.auto_offline) return res.status(400).json({error: 'Dados do agente não informado!'});
+    if (!req.params.id_agent) return res.status(400).json({ error: 'Id do agente não informado!' });
+    if (!req.body.role || !req.body.availability || !req.body.auto_offline) return res.status(400).json({ error: 'Dados do agente não informado!' });
     if (req.body.role !== 'agent' || req.body.role !== 'administrator') {
         return res.status(400).json({ error: 'Permissao invalida' });
     }
-    if (req.body.availability !== 'available' || req.body.availability !== 'busy' || req.body.availability !== 'offline'){
-        return res.status(400).json({ error: 'Status de disponibilidade inválido!' });
-    }
-    if (typeof req.body.auto_offline !== 'boolean') {
-        return res.status(400).json({ error: 'Dados inválidos, esperado boolean!' });
-    }
+    req.body.availability_status === (req.body.availability_status === 'available' || req.body.availability_status === 'busy' || req.body.availability_status === 'offline') ? req.body.availability_status : 'available';
+    typeof req.body.auto_offline === 'boolean' ? req.body.auto_offline : true;
     
+
     const userData = {
         role: req.body.role,
         availability: req.body.availability,
@@ -108,7 +134,7 @@ async function updateAgent(req, res){
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
-                'api_access_token': user_api_key,                
+                'api_access_token': user_api_key,
             },
             body: JSON.stringify(userData) // Aqui é onde você insere os dados do corpo
         });
@@ -118,7 +144,7 @@ async function updateAgent(req, res){
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data = await response.json();        
+        const data = await response.json();
         console.log(data);//teste
         return res.status(200).json(data);
     } catch (error) {
@@ -126,29 +152,30 @@ async function updateAgent(req, res){
     }
 }
 
-async function deleteAgent(req, res){
+async function deleteAgent(req, res) {
     //DELETE delete agent in account
-    const id_account = req.params.id_account;
+    const chatwootData = await ChatWootUserConfigs.getUserConfigs(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
+    const id_account = chatwootData.id_account_chatwoot;
     const id_agent = req.params.id_agent;// id of agent deleted
-    const url = `${process.env.API_URL}/api/v1/accounts/${id_account}/agents/${id_agent}`;
+    const url = `${chatwootData.url_chatwoot}/api/v1/accounts/${id_account}/agents/${id_agent}`;
+    const user_api_key = chatwootData.user_chatwoot_token;
 
-    const user_api_key =req.headers.user_token;
-    if (!user_api_key) return res.status(401).json({error: 'Token de usuario não informado!'});
-    
+    if(!req.params.id_agent) return res.status(400).json({error: 'Id do agente não informado!'});
+
     try {
         const response = await fetch(url, {
             method: 'DELETE',
             headers: {
-                'api_access_token': user_api_key                
-            }            
+                'api_access_token': user_api_key
+            }
         });
 
         if (!response.ok) {
             console.log(response.status);//teste
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
-        const data = await response.json();        
+
+        const data = await response.json();
         console.log(data);//teste
         return res.status(200).json(data);
     } catch (error) {
@@ -156,4 +183,4 @@ async function deleteAgent(req, res){
     }
 }
 
-export default { listAgentsInAccout, addNewAgent, updateAgent, deleteAgent};
+export default { listAgentsInAccout, addNewAgent, updateAgent, deleteAgent };

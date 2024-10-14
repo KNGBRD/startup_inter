@@ -5,27 +5,47 @@ import express from "express";
 
 import clients from "./src/controllers/clients.js";
 import user from "./src/controllers/user.js"; //importar user para o login
-import auth  from './src/middlewares/auth.js'; // midware para verificar autenticaçao
+import auth from './src/middlewares/auth.js'; // midware para verificar autenticaçao
 import dbsync from "./src/controllers/dbUpdate.js";
-
+import globalConfigs from "./src/controllers/acoutConfigs.js";
 import chatAgents from "./src/controllers/chatwoot/application/agentsAcount.js";
 import chatInbox from "./src/controllers/chatwoot/application/inboxes.js";
-
+import chatPlatformAcount from "./src/controllers/chatwoot/platform/acount.js";
+import usersPlatform from "./src/controllers/chatwoot/platform/users.js";
 
 import loginteste from "./src/controllers/views/loginPage.js";
 
 const routes = express.Router();
+  	
+//rota de configuraçoes globais 
+routes.post("/global_configs", auth.hasPermission('root'), globalConfigs.addAcoutConfigs);
 
-//rotas chat Agents
-routes.get("/chat/agents/:id_account", chatAgents.listAgentsInAccout);
-routes.post("/chat/agents/:id_account", chatAgents.addNewAgent);
-routes.patch("/chat/agents/:id_account/:id_agent", chatAgents.updateAgent);
-routes.delete("/chat/agents/:id_account/:id_agent", chatAgents.deleteAgent);
-//rotas chat Inbox
-routes.get("/chat/inbox/:id_account", chatInbox.listAgentInbox);//lista todas as caixas de entrada de uma conta
-routes.get("/chat/inbox/:id_account/:id_inbox", chatInbox.listAgentInbox);//lista agentes de uma caixa de entrada
-routes.post("/chat/inbox/:id_account/:id_inbox", chatInbox.addAgentInbox);//adiciona um agente a uma caixa de entrada
-routes.delete("/chat/inbox/:id_account/:id_inbox", chatInbox.deleteAgentInbox);//remove um agente de uma caixa de entrada
+//rotas platform chatwoot accouts
+routes.post("/chat/platform/accouts", auth.hasPermission('funcionario'), chatPlatformAcount.createAccount);//cria uma caixa de entrada
+routes.patch("/chat/platform/accouts/:id_account", auth.hasPermission('root'), chatPlatformAcount.patchAccount);//atualiza uma conta
+//rotas platform chatwoot accouts users
+routes.post("/chat/platform/accounts/:id_account", auth.hasPermission('funcionario'), chatPlatformAcount.addUserAccount);//adiciona um usuario a uma conta
+routes.delete("/chat/platform/accouts/:id_account", auth.hasPermission('root'), chatPlatformAcount.deleteUserAccount);//deleta uma conta
+routes.get("/chat/platform/accouts/:id_account", auth.hasPermission('funcionario'), chatPlatformAcount.getAllUserAccount);//lista todos os usuarios de uma conta
+//rotas platform chatwoot users
+routes.post("/chat/platform/users", auth.hasPermission('funcionario'), usersPlatform.createAUser);//cria um usuario
+routes.patch("/chat/platform/users/:id_user", auth.hasPermission('funcionario'), usersPlatform.updateAUser);//atualiza um usuario
+routes.get("/chat/platform/users/:id_user", auth.hasPermission('funcionario'), usersPlatform.getAUser);//pega um usuario
+routes.delete("/chat/platform/users/:id_user", auth.hasPermission('funcionario'), usersPlatform.deleteAUser);//deleta um usuario
+
+//rotas application chatwoot
+//rotas application chat Agents chatwoot
+routes.get("/chat/agents", auth.hasPermission('cliente'), chatAgents.listAgentsInAccout);//lista todos os agentes de uma contaa
+routes.post("/chat/agents", auth.hasPermission('cliente'), chatAgents.addNewAgent);//adiciona um novo agente na conta
+routes.patch("/chat/agents/:id_agent", auth.hasPermission('cliente'), chatAgents.updateAgent);//altera uma gente da conta
+routes.delete("/chat/agents/:id_agent", auth.hasPermission('cliente'), chatAgents.deleteAgent);//deleta um agente da conta
+
+//rotas application chat Inbox para cliente chatwoot
+routes.get("/chat/inboxes", auth.hasPermission('cliente'), chatInbox.listAgentInbox);//lista todas as caixas de entrada de uma conta
+routes.get("/chat/inbox/:id_inbox", auth.hasPermission('cliente'), chatInbox.getAnInbox);//lista uma caixa de entrada especifica
+routes.get("/chat/inbox/:id_inbox", auth.hasPermission('cliente'), chatInbox.listAgentInbox);//lista agentes de uma caixa de entrada
+routes.post("/chat/inbox/:id_inbox", auth.hasPermission('cliente'), chatInbox.addAgentInbox);//adiciona um agente a uma caixa de entrada
+routes.delete("/chat/inbox/:id_inbox", auth.hasPermission('cliente'), chatInbox.deleteAgentInbox);//remove um agente de uma caixa de entrada
 
 //rotas login
 routes.post("/login", user.login);//Rota de login
@@ -35,26 +55,27 @@ routes.post("/user/update_name", auth.hasPermission('funcionario'), user.updateN
 routes.patch("/user/update_permission", auth.hasPermission('root'), user.updatePermission);//atualiza permissao de usuario para admin
 
 //rotas clientes
-routes.get("/clients",  clients.findAll);
-routes.post("/clients",  clients.addClient);
-routes.get("/clients/:id",  clients.findClient);
-routes.put("/clients/:id",  clients.updateClient);
-routes.delete("/clients/:id",  clients.deleteClient);
+routes.get("/clients", clients.findAll);
+routes.post("/clients", clients.addClient);
+routes.get("/clients/:id", clients.findClient);
+routes.put("/clients/:id", clients.updateClient);
+routes.delete("/clients/:id", clients.deleteClient);
 
 //rotas de testes
 //rota para teste de permissão de usuario
-routes.get("/teste",auth.hasPermission('read'), (req, res) => {
+routes.get("/teste", auth.hasPermission('read'), (req, res) => {
   res.json({ message: 'permissao funcionando' });
 });
 
 
 //rotas de viwes
 // routes.get("/view", clients.viewAll);
-routes.get('/login_teste',loginteste); 
+routes.get('/login_teste', loginteste);
+routes.get('/global_configs/:config_id', auth.hasPermission('root'),  globalConfigs.getGlobalConfigs);
 
 
 //rota para sincronizar banco de dados somente para usuario root
-routes.post("/db/sync",auth.hasPermission('root'), dbsync);
+routes.post("/db/sync", auth.hasPermission('root'), dbsync);
 
 //rorta para saber se a aplicação está rodando
 routes.get("/", (req, res) => {
