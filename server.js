@@ -2,9 +2,9 @@ import express from "express";
 import routes from "./routes.js";
 import db from "./src/db.js";
 import cors from 'cors'; // Importando o CORS
+import path from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import path from 'path';
 
 const app = express();
 // Obter o caminho do diretório atual em ES Modules

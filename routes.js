@@ -13,7 +13,7 @@ import chatInbox from "./src/controllers/chatwoot/application/inboxes.js";
 import chatPlatformAcount from "./src/controllers/chatwoot/platform/acount.js";
 import usersPlatform from "./src/controllers/chatwoot/platform/users.js";
 
-import loginteste from "./src/controllers/views/loginPage.js";
+import views from "./src/controllers/views/loginPage.js";
 
 const routes = express.Router();
   	
@@ -66,12 +66,11 @@ routes.delete("/clients/:id", clients.deleteClient);
 routes.get("/teste", auth.hasPermission('read'), (req, res) => {
   res.json({ message: 'permissao funcionando' });
 });
-
+routes.get('/global_configs/:config_id', auth.hasPermission('root'),  globalConfigs.getGlobalConfigs);
 
 //rotas de viwes
-// routes.get("/view", clients.viewAll);
-routes.get('/login_teste', loginteste);
-routes.get('/global_configs/:config_id', auth.hasPermission('root'),  globalConfigs.getGlobalConfigs);
+routes.get('/login_teste', views.loginView);
+routes.get('/dashboard',views.dashboardView);
 
 
 //rota para sincronizar banco de dados somente para usuario root
