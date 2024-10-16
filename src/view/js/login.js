@@ -1,3 +1,4 @@
+var backend = 'http://127.0.0.1:5000';
 document.getElementById('loginButton').addEventListener('click', async (event) => {
     event.preventDefault();
     // Coleta os valores dos campos de e-mail e senha
@@ -17,13 +18,13 @@ document.getElementById('loginButton').addEventListener('click', async (event) =
 
     // Cria o corpo da requisição com os dados coletados
     const dataBody = {
-        "email": email,
-        "password": password
+        email: email,
+        password: password
     };
     console.log("e-mail e senha coletados : ", dataBody);
     // Envia a requisição POST
 
-    const url = `http://127.0.0.1:5000/login`;
+    const url = `${backend}/login`;
     try {
         const response = await fetch(url, {
             method: 'POST',
@@ -35,7 +36,7 @@ document.getElementById('loginButton').addEventListener('click', async (event) =
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        }  
 
         const data = await response.json();
         console.log(data);//teste
@@ -43,15 +44,14 @@ document.getElementById('loginButton').addEventListener('click', async (event) =
         // Recupera os dados do Local Storage
         const dadosSalvos = localStorage.getItem('userDataToken');
         console.log("dados salvos no local storage: ", dadosSalvos);
-        alert('Login realizado com sucesso!');
+        alert('Login realizado com sucesso!'); //teste
         
         setTimeout(() => {//redireciona para a pagina de dashboard com atraso de 1 segundo
-            window.location.href = 'http://127.0.0.1:5000/dashboard'; 
+            window.location.href = '/dashboard'; 
         }, 1000); // Redireciona após 1 segundo
 
     } catch (error) {
         console.error(`Erro ao fazer a requisição: ${error}`);
     }
-
 });
 

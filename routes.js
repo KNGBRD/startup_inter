@@ -13,7 +13,7 @@ import chatInbox from "./src/controllers/chatwoot/application/inboxes.js";
 import chatPlatformAcount from "./src/controllers/chatwoot/platform/acount.js";
 import usersPlatform from "./src/controllers/chatwoot/platform/users.js";
 
-import views from "./src/controllers/views/loginPage.js";
+import views from "./src/controllers/views/pagesView.js";
 
 const routes = express.Router();
   	
@@ -63,13 +63,13 @@ routes.delete("/clients/:id", clients.deleteClient);
 
 //rotas de testes
 //rota para teste de permissão de usuario
-routes.get("/teste", auth.hasPermission('read'), (req, res) => {
-  res.json({ message: 'permissao funcionando' });
+routes.get("/teste", auth.hasPermission('cliente'), (req, res) => {
+  res.status(200).json({ message: 'teste token' });
 });
 routes.get('/global_configs/:config_id', auth.hasPermission('root'),  globalConfigs.getGlobalConfigs);
 
 //rotas de viwes
-routes.get('/login_teste', views.loginView);
+routes.get('/login', views.loginView);
 routes.get('/dashboard',views.dashboardView);
 
 
