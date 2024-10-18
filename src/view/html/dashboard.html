@@ -4,81 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link rel="stylesheet" href="./../css/dashboard.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.jshttps://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./../js/jwtCheck.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./../css/font-awesome.css">
     <title></title>
 </head>
 
 <body>
-</a>
-<div id="viewport">
-    <!-- Sidebar -->
-    <div id="sidebar">
-      <header>
-        <a href="#">Sphynx</a>
-      </header>
-      <ul class="nav">
-        <li>
-          <a href="#">
-            <i class="zmdi zmdi-view-dashboard"></i> Dashboard
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="zmdi zmdi-link"></i> Shortcuts
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="zmdi zmdi-widgets"></i> Overview
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="zmdi zmdi-calendar"></i> Events
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="zmdi zmdi-comments"></i> About
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="zmdi zmdi-settings"></i> configuraçoes
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="zmdi zmdi-comment-more"></i> Contact
-          </a>
-        </li>
-      </ul>
-    </div>
-    <!-- Content -->
-    <div id="content">
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="#"><i class="zmdi zmdi-notifications text-danger"></i>
-              </a>
-            </li>
-            <li><a id="logout" href="#">Sair</a></li>
-          </ul>
+    <div class='dashboard'>
+        <div class="dashboard-nav">
+            <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="#" class="brand-logo"> <i
+                        class="fas fa-cat"></i> <span>Sphynx</span></a></header>
+            <nav class="dashboard-nav-list"><a href="#" class="dashboard-nav-item"><i class="fas fa-home"></i>
+                    Home </a><a href="#" class="dashboard-nav-item active"><i class="fas fa-tachometer-alt"></i>
+                    dashboard
+                </a><a href="#" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> Lorem Ipsum </a>
+                <div class='dashboard-nav-dropdown'><a href="#!"
+                        class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fab fa-whatsapp"></i>
+                        WhatssApp </a>
+                    <div class='dashboard-nav-dropdown-menu'><a href="#"
+                            class="dashboard-nav-dropdown-item">QRCode</a><a href="#"
+                            class="dashboard-nav-dropdown-item">Recent</a><a href="#"
+                            class="dashboard-nav-dropdown-item">Images</a><a href="#"
+                            class="dashboard-nav-dropdown-item">Settings</a></div>
+                </div>
+                <div class='dashboard-nav-dropdown'><a href="#!"
+                        class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-users"></i> Sphynx
+                        Chat </a>
+                    <div class='dashboard-nav-dropdown-menu'><a href="#" class="dashboard-nav-dropdown-item">All</a><a
+                            href="#" class="dashboard-nav-dropdown-item">Subscribed</a><a href="#"
+                            class="dashboard-nav-dropdown-item">Non-subscribed</a><a href="#"
+                            class="dashboard-nav-dropdown-item">Banned</a><a href="#"
+                            class="dashboard-nav-dropdown-item">New</a></div>
+                </div>
+                <div class='dashboard-nav-dropdown'><a href="#!"
+                        class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-money-check-alt"></i>
+                        Payments </a>
+                    <div class='dashboard-nav-dropdown-menu'><a href="#" class="dashboard-nav-dropdown-item">All</a><a
+                            href="#" class="dashboard-nav-dropdown-item">Recent</a><a href="#"
+                            class="dashboard-nav-dropdown-item"> Projections</a>
+                    </div>
+                </div>
+                <a href="#" class="dashboard-nav-item"><i class="fas fa-cogs"></i> Settings </a><a href="#"
+                    class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
+                <div class="nav-item-divider"></div>
+                <a href="#" id="logout" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout </a>
+            </nav>
         </div>
-      </nav>
-      <div class="container-fluid">
-        <h1>Simple Sidebar</h1>
-        <p>
-          Make sure to keep all page content within the
-          <code>#content</code>.
-        </p>
-      </div>
+        <div class='dashboard-app'>
+            <header class='dashboard-toolbar'><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a></header>
+            <div class='dashboard-content'>
+                <div class='container'>
+                    <div class='card'>
+                        <div class='card-header'>
+                            <h1>Welcome back Jim</h1>
+                        </div>
+                        <div class='card-body'>
+                            <p>Your account type is: Administrator</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
     <script src="./../js/dashboard.js"></script>
 </body>

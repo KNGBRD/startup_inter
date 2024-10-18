@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     const dadosSalvos = localStorage.getItem('userDataToken');
     console.log(dadosSalvos);  // Exibe os dados salvos no console teste
