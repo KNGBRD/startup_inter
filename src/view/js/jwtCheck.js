@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(dadosSalvos);  // Exibe os dados salvos no console teste
 
     if (dadosSalvos) {
-        console.log("token salvo na memoria");//teste
+        console.log("token salvo na memoria", dadosSalvos);//teste
         fetch('/teste', {
             method: 'GET',
             headers: {
@@ -13,8 +13,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (response.ok) {
                 // Se a resposta for ok (status 200), redireciona para a página de dashboard
                 if (window.location.pathname === '/login') {
-                    window.location.href = '/dashboard';  // Redireciona para a página de dashboard
-                }                
+                    setTimeout(() => {//redireciona para a pagina de dashboard com atraso de 1 segundo
+                        window.location.href = '/dashboard';
+                    }, 1000); // Redireciona após 1 segundo
+                }
             } else {
                 // Se houver erro (como 401 Unauthorized), exibe uma mensagem ou toma outra ação
                 console.error("Falha ao autenticar. Redirecionando para a página de login.");//teste
@@ -24,12 +26,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         }).catch(error => {
-            console.error("Erro na requisição:", error);
             // Trata erros de rede ou problemas com a requisição
+            console.error("Erro na requisição:", error);
         });
-        //window.location.href = '/dashboard'; // Redireciona  
-    } else {
-        //window.location.href = '/login'; // Redireciona para a página de login
-        console.log("usuario nao logado");
+    } else if (window.location.pathname !== '/login') {
+        console.log("usuario nao logado"); //teste
+        window.location.href = '/login';  // Redireciona para a página de login
     }
 });

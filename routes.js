@@ -12,6 +12,7 @@ import chatAgents from "./src/controllers/chatwoot/application/agentsAcount.js";
 import chatInbox from "./src/controllers/chatwoot/application/inboxes.js";
 import chatPlatformAcount from "./src/controllers/chatwoot/platform/acount.js";
 import usersPlatform from "./src/controllers/chatwoot/platform/users.js";
+import reports from "./src/controllers/chatwoot/reports/reports.js"
 
 import views from "./src/controllers/views/pagesView.js";
 
@@ -19,6 +20,8 @@ const routes = express.Router();
   	
 //rota de configuraçoes globais 
 routes.post("/global_configs", auth.hasPermission('root'), globalConfigs.addAcoutConfigs);
+routes.get('/global_configs/:config_id', auth.hasPermission('root'),  globalConfigs.getGlobalConfigs);
+routes.post("/global_configs/chatwoot", auth.hasPermission('funcionario'), globalConfigs.addUserChatwootConfigs);
 
 //rotas platform chatwoot accouts
 routes.post("/chat/platform/accouts", auth.hasPermission('funcionario'), chatPlatformAcount.createAccount);//cria uma caixa de entrada
@@ -61,24 +64,30 @@ routes.get("/clients/:id", clients.findClient);
 routes.put("/clients/:id", clients.updateClient);
 routes.delete("/clients/:id", clients.deleteClient);
 
+//rotas de repots
+routes.get("/reports/conversations", auth.hasPermission('cliente'), reports.accountConversationMetrics);
+routes.get("/reports/conversations/account/:since/:until", auth.hasPermission('cliente'), reports.accountReportSumary);// novo
+routes.get("/reports/summary/account/:since/:until", auth.hasPermission('cliente'), reports.accountReportSumaryInterval);// novo
+routes.get("/reports/teste", auth.hasPermission('cliente'), reports.teste); //teste
+
 //rotas de testes
 //rota para teste de permissão de usuario
 routes.get("/teste", auth.hasPermission('cliente'), (req, res) => {
   res.status(200).json({ message: 'teste token' });
 });
-routes.get('/global_configs/:config_id', auth.hasPermission('root'),  globalConfigs.getGlobalConfigs);
 
 //rotas de viwes
+routes.get('/home', views.homeView);//home
 routes.get('/login', views.loginView);
 routes.get('/dashboard',views.dashboardView);
+routes.get('/cadastro',views.cadasroView);//teste
+routes.get('/new_user', views.testeView);//teste alterar nomes
 
 
 //rota para sincronizar banco de dados somente para usuario root
 routes.post("/db/sync", auth.hasPermission('root'), dbsync);
 
 //rorta para saber se a aplicação está rodando
-routes.get("/", (req, res) => {
-  return res.json({ name: "it's a live!" });
-});
+routes.get("/", views.homeView);
 
 export { routes as default };

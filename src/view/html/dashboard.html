@@ -8,22 +8,22 @@
     <script src="./../js/jwtCheck.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="./../css/font-awesome.css">
+    <link rel="icon" href="./../assets/image/logoSphynx.png" type="image/png">
     <title></title>
 </head>
 
 <body>
     <div class='dashboard'>
         <div class="dashboard-nav">
-            <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="#" class="brand-logo"> <i
-                        class="fas fa-cat"></i> <span>Sphynx</span></a></header>
-            <nav class="dashboard-nav-list"><a href="#" class="dashboard-nav-item"><i class="fas fa-home"></i>
-                    Home </a><a href="#" class="dashboard-nav-item active"><i class="fas fa-tachometer-alt"></i>
-                    dashboard
-                </a><a href="#" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> Lorem Ipsum </a>
+            <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="#" class="brand-logo"> 
+                <img src="./../assets/image/logoSphynx.png" class="logoSphynx"> <span>Sphynx</span></a></header>
+            <nav class="dashboard-nav-list"><a href="/index" class="dashboard-nav-item"><i class="fas fa-home"></i>
+                    Home </a><a href="/dashboard" class="dashboard-nav-item active"><i class="fas fa-tachometer-alt"></i>
+                    Dashboard  
+                </a><a href="/cadastro" class="dashboard-nav-item"><i class="fas fa-file-upload"></i>Cadasto SphynxChat</a>
                 <div class='dashboard-nav-dropdown'><a href="#!"
                         class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fab fa-whatsapp"></i>
-                        WhatssApp </a>
+                        WhatsApp </a>
                     <div class='dashboard-nav-dropdown-menu'><a href="#"
                             class="dashboard-nav-dropdown-item">QRCode</a><a href="#"
                             class="dashboard-nav-dropdown-item">Recent</a><a href="#"
@@ -47,8 +47,8 @@
                             class="dashboard-nav-dropdown-item"> Projections</a>
                     </div>
                 </div>
-                <a href="#" class="dashboard-nav-item"><i class="fas fa-cogs"></i> Settings </a><a href="#"
-                    class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
+                <a href="#" class="dashboard-nav-item"><i class="fas fa-cogs"></i> Settings </a>
+                <a href="/new_user" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
                 <div class="nav-item-divider"></div>
                 <a href="#" id="logout" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout </a>
             </nav>
@@ -59,17 +59,84 @@
                 <div class='container'>
                     <div class='card'>
                         <div class='card-header'>
-                            <h1>Welcome back Jim</h1>
+                            <h1 id="welcomeMessage" >Bem vindo de volta!</h1>
                         </div>
-                        <div class='card-body'>
-                            <p>Your account type is: Administrator</p>
+                        
+
+
+
+                        <div class="dashboard-painel">
+                            <!-- Primeiro painel -->
+                            <div class="container-dashboard">
+                                <h1>Status dos Chamados</h1>
+                                <div class="status">
+                                    <div class="status-item">
+                                        <span class="label">Abertas:</span>
+                                        <span id="open" class="value">-</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <span class="label">Não Atendidas:</span>
+                                        <span id="unattended" class="value">-</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <span class="label">Não Atribuida:</span>
+                                        <span id="unassigned" class="value">-</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <span class="label">Pendente:</span>
+                                        <span id="pending" class="value">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <!-- Segundo painel -->
+                            <div class="container-dashboard">
+                                <h1>Estatísticas de Conversas</h1>
+                                <div class="status">
+                                    <div class="status-item">
+                                        <span class="label">Conversas:</span>
+                                        <span id="conversations_count" class="value">-</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <span class="label">Mensagens Recebidas:</span>
+                                        <span id="incoming_messages_count" class="value">-</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <span class="label">Mensagens Enviadas:</span>
+                                        <span id="outgoing_messages_count" class="value">-</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <span class="label">Tempo medio primeira mensagem:</span>
+                                        <span id="avg_first_response_time" class="value">-</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <span class="label">Tempo medio de resoluçao:</span>
+                                        <span id="avg_resolution_time" class="value">-</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <span class="label">Resolutions Count:</span>
+                                        <span id="resolutions_count" class="value">-</span>
+                                    </div>
+                                    <div class="status-item">
+                                        <span class="label">Tempo de Resposta:</span>
+                                        <span id="reply_time" class="value">-</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+
+
+
+
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="./../js/navbar.js"></script>
     <script src="./../js/dashboard.js"></script>
 </body>
 

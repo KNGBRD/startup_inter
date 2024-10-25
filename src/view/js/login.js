@@ -39,12 +39,12 @@ document.getElementById('loginButton').addEventListener('click', async (event) =
         }  
 
         const data = await response.json();
-        console.log(data);//teste
+        //console.log(data);//teste
         localStorage.setItem('userDataToken', data.token);
+        localStorage.setItem('userName', data.name);
         // Recupera os dados do Local Storage
         const dadosSalvos = localStorage.getItem('userDataToken');
         console.log("dados salvos no local storage: ", dadosSalvos);
-        alert('Login realizado com sucesso!'); //teste
         
         setTimeout(() => {//redireciona para a pagina de dashboard com atraso de 1 segundo
             window.location.href = '/dashboard'; 

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../css/newUser.css">
+    <script src="./../js/jwtCheck.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="icon" href="./../assets/image/logoSphynx.png" type="image/png">
+    <title>Cadastro de Clientes</title>
+</head>
+
+<body>
+    <div class='dashboard'>
+        <div class="dashboard-nav">
+            <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="#" class="brand-logo"> 
+                <img src="./../assets/image/logoSphynx.png" class="logoSphynx">  <span>Sphynx</span></a></header>
+            <nav class="dashboard-nav-list"><a href="/index" class="dashboard-nav-item"><i class="fas fa-home"></i>
+                    Home </a><a href="/dashboard" class="dashboard-nav-item "><i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a><a href="/cadastro" class="dashboard-nav-item "><i class="fas fa-file-upload"></i>Cadasto SphynxChat</a>
+                <div class='dashboard-nav-dropdown'><a href="#!"
+                        class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fab fa-whatsapp"></i>
+                        WhatsApp </a>
+                    <div class='dashboard-nav-dropdown-menu'><a href="#"
+                            class="dashboard-nav-dropdown-item">QRCode</a><a href="#"
+                            class="dashboard-nav-dropdown-item">Recent</a><a href="#"
+                            class="dashboard-nav-dropdown-item">Images</a><a href="#"
+                            class="dashboard-nav-dropdown-item">Settings</a></div>
+                </div>
+                <div class='dashboard-nav-dropdown'><a href="#!"
+                        class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-users"></i> Sphynx
+                        Chat </a>
+                    <div class='dashboard-nav-dropdown-menu'><a href="#" class="dashboard-nav-dropdown-item">All</a><a
+                            href="#" class="dashboard-nav-dropdown-item">Subscribed</a><a href="#"
+                            class="dashboard-nav-dropdown-item">Non-subscribed</a><a href="#"
+                            class="dashboard-nav-dropdown-item">Banned</a><a href="#"
+                            class="dashboard-nav-dropdown-item">New</a></div>
+                </div>
+                <div class='dashboard-nav-dropdown'><a href="#!"
+                        class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-money-check-alt"></i>
+                        Payments </a>
+                    <div class='dashboard-nav-dropdown-menu'><a href="#" class="dashboard-nav-dropdown-item">All</a><a
+                            href="#" class="dashboard-nav-dropdown-item">Recent</a><a href="#"
+                            class="dashboard-nav-dropdown-item"> Projections</a>
+                    </div>
+                </div>
+                <a href="#" class="dashboard-nav-item"><i class="fas fa-cogs"></i> Settings </a>
+                <a href="/new_user" class="dashboard-nav-item active"><i class="fas fa-user"></i> Profile </a>
+                <div class="nav-item-divider"></div>
+                <a href="#" id="logout" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout </a>
+            </nav>
+        </div>
+        <div class='dashboard-app'>
+            <header class='dashboard-toolbar'><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a></header>
+            <div class='dashboard-content'>
+
+                <div class="container">
+                    <h1>Cadastrar novo usuario</h1>
+                    <form>
+                      <label for="name">Nome do usuario</label>
+                      <input type="text" id="name" name="name" required>
+                      
+                      <label for="email">E-mail do Usuário</label>
+                      <input type="text" id="email" name="email" required>
+
+                      <label for="permission">Permissão do usuario</label>
+                      <select  id="permission" name="permission" required>
+                        <option value="user">User</option>
+                        <option value="cliente">Cliente</option>
+                      </select>
+                      
+                      <label for="password">Senha</label>
+                      <div class="password-container">
+                        <input type="password" id="password" name="password" minlength="8" required>
+                        <button type="button" id="togglePassword" class="toggle-password">👁️</button>
+                      </div>
+                      
+                      <label for="confirm_password">Confirme a Senha</label>
+                      <input type="password" id="confirm_password" name="confirm_password" minlength="8" required>
+                      
+                      <button id="submit" type="submit">Enviar</button>
+                    </form>
+                  </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="./../js/newUser.js"></script>
+    <script src="./../js/navbar.js"></script>
+</body>
+
+</html>

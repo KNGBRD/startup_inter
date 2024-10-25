@@ -56,11 +56,13 @@ async function login(req, res) {
 //criar usuario
 async function singUp(req, res) {
     console.log("req.body:   ", req.body);//teste
-    var dados = {
+    const dados = {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password
     }
+
+    req.body.permission == "cliente" ? dados.permission = "cliente" : dados.permission = "user";
 
     console.log("dados de cadastro:   ", dados); //teste
     //console.log ("dados de cadastro:   ",dados.name, dados.email, dados.password, req.body.confirm_password);

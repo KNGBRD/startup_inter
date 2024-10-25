@@ -1,7 +1,7 @@
 import  DataTypes  from "sequelize";
 import db from "../db.js";
 
-export default db.define("acount_configs", {
+export default db.define("account_configs", {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

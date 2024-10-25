@@ -1,5 +1,6 @@
 import ChatwootModel from './../models/acountConfigs.js';
 import ChatWootUserConfigs from './../models/chatWoot.js';
+import UserDb from './../models/userModel.js';
 import env from "dotenv/config";
 
 async function addAcoutConfigs(req, res) {
@@ -43,11 +44,11 @@ async function getAcoutConfigs(configId) {
     }
 };
 
-async function getUserConfigs (idUser){
+async function getUserConfigs(idUser) {
     try {
         // Busca informações do chatwoot do usuário no banco de dados
         const userConfig = await ChatWootUserConfigs.findOne({
-            attributes: ['id', 'id_acount_chatwoot', 'user_chatwoot_token', 'url_chatwoot','user_id'],
+            attributes: ['id', 'id_acount_chatwoot', 'user_chatwoot_token', 'url_chatwoot', 'user_id'],
             where: {
                 user_id: idUser
             }
@@ -60,9 +61,40 @@ async function getUserConfigs (idUser){
 
         return userConfig;
     } catch (error) {
-        // Lança um erro se não encontrar o usuário ou se ocorrer outro erro
+        console.log("Erro ao buscar dados do Chatwoot: ", error); //teste
         throw new Error(`Erro ao buscar dados do Chatwoot: ${error.message}`);
     }
 };
 
-export default { addAcoutConfigs, getAcoutConfigs, getGlobalConfigs, getUserConfigs }; 
+async function addUserChatwootConfigs(req, res) {
+    const dados = {
+        id_acount_chatwoot: req.body.id_acount_chatwoot,
+        user_chatwoot_token: req.body.user_chatwoot_token,
+        url_chatwoot: req.body.url_chatwoot,
+    };
+    if (!req.body.user_email) {
+        return res.status(400).json({ error: "Email do usuario é obrigatório" });
+    }
+
+    try {
+        const idDB = await UserDb.findOne({
+            attributes: ['id'],
+            where: {
+                email: req.body.user_email
+            }
+        });
+        if (!idDB) {
+            console.log("Usuario não encontrado"); //teste
+            return res.status(400).json({ error: "Usuario não encontrado" });
+        }
+        dados.user_id = idDB.id;
+        const newUserConfigs = await ChatWootUserConfigs.create(dados);//cria um novo usuario
+        console.log("dados teste: ", newUserConfigs); //teste
+        return res.status(200).json(newUserConfigs);
+    } catch (error) {
+        console.log("erro: ", error); //teste
+        return res.status(500).json({ error: "Falha ao salvar usuario" });
+    }
+}
+
+export default { addAcoutConfigs, getAcoutConfigs, getGlobalConfigs, getUserConfigs, addUserChatwootConfigs }; 
