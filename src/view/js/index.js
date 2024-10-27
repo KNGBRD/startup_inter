@@ -31,17 +31,17 @@ document.getElementById('btn-login').addEventListener('click', () => {
 
 
 const myObserver = new IntersectionObserver((entries) => {
-    
+
     entries.forEach((entry) => {
-     if(entry.isIntersecting){
-         entry.target.classList.add('show')
-     } else {
-         entry.target.classList.remove('show')
-     }
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show')
+        } else {
+            entry.target.classList.remove('show')
+        }
     })
- })
- 
- const elements = document.querySelectorAll('.container')
- 
- 
- elements.forEach((element) => myObserver.observe(element))
+})
+
+const elements = document.querySelectorAll('.container')
+
+
+elements.forEach((element) => myObserver.observe(element))
