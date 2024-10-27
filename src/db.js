@@ -7,16 +7,13 @@ const dbHost = process.env.DB_HOST;
 const dbPassword = process.env.DB_PASSWORD;
 const dbPort = process.env.DB_PORT || 5432; // porta padrão do PostgreSQL
 
-// const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
-//   //passar os dados para o sequelize
-//   dialect: "postgres", // informar que estamos usando PostgreSQL
-//   host: dbHost, // o host do banco
-//   port: dbPort, // porta do PostgreSQL
-//   logging: false, // desabilitar logs do Sequelize (opcional)
-// });
-
-const sequelize = new Sequelize('postgres://backendinter:Inter2024@@5.161.105.90:5432/startup_inter',{
-  dialectModule: require('pg')
+const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
+  //passar os dados para o sequelize
+  dialect: "postgres", // informar que estamos usando PostgreSQL
+  dialectModule: pg, // I've added this.
+  host: dbHost, // o host do banco
+  port: dbPort, // porta do PostgreSQL
+  logging: false, // desabilitar logs do Sequelize (opcional)
 });
 
 // sequelize.authenticate()
