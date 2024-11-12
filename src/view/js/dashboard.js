@@ -26,7 +26,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 async function getAcountReportSumary(since, until) {
 
     try {
-        const response = await fetch(`http://127.0.0.1:5000/reports/conversations/account/${since}/${until}`, {
+        //const backendUrl ="http://127.0.0.1:5000";
+        const backendUrl ="https://sphnx.tec.br"; //produçao
+        const response = await fetch(`${backendUrl}/reports/conversations/account/${since}/${until}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('userDataToken')}`  // Passa o token no cabeçalho como Bearer
@@ -43,7 +45,9 @@ async function getAcountReportSumary(since, until) {
 async function getAcountReportSumaryInterval(since, until) {
 
     try {
-        const response = await fetch(`http://127.0.0.1:5000/reports/summary/account/${since}/${until}`, {
+        //const backendUrl ="http://127.0.0.1:5000"; 
+        const backendUrl ="https://sphnx.tec.br";
+        const response = await fetch(`${backendUrl}/reports/summary/account/${since}/${until}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('userDataToken')}`  // Passa o token no cabeçalho como Bearer

@@ -1,7 +1,14 @@
 import db from "../db.js";
 //importar todoss os models para sincronizar o banco de dados
 import Relationships from "../models/relationships.js";
-import acountConfigs from "../models/acountConfigs.js";
+// import ChatWoot from "../models/chatWoot.js";
+// import Evolution from "../models/evolution.js";
+// import User from "../models/userModel.js";
+// import Client from "../models/client.js";
+// import AccountConfigs from "../models/accountConfigs.js";
+// import SystemEvolutionConfig from "../models/systemEvolutionConfig.js";
+// import ChatWootUserConfigs from "../models/chatWoot.js";
+
 
 import readline from 'readline';
 
@@ -18,17 +25,20 @@ function updateDbFromConsole(command) {
     }
 }
 
-// Configura o readline para ler a entrada do console
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+// Verifica se o ambiente não é de produção
+if (process.env.PRODUCTION === 'false') {
+    // Configura o readline para ler a entrada do console
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
 
-console.log("Digite 'force' para recriar o banco de dados ou 'alter' para apenas atualizar as tabelas:");
+    console.log("Digite 'force' para recriar o banco de dados ou 'alter' para apenas atualizar as tabelas:");
 
-rl.on('line', (input) => {
-    updateDbFromConsole(input.trim());
-});
+    rl.on('line', (input) => {
+        updateDbFromConsole(input.trim());
+    });
+}
 
 // Função para atualizar o banco de dados via requisição HTTP
 export default function updateDb(req, res) {

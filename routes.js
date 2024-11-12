@@ -7,21 +7,22 @@ import clients from "./src/controllers/clients.js";
 import user from "./src/controllers/user.js"; //importar user para o login
 import auth from './src/middlewares/auth.js'; // midware para verificar autenticaçao
 import dbsync from "./src/controllers/dbUpdate.js";
-import globalConfigs from "./src/controllers/acoutConfigs.js";
-import chatAgents from "./src/controllers/chatwoot/application/agentsAcount.js";
+import globalConfigs from "./src/controllers/accoutConfigs.js";
+import systemChatwootConfig from "./src/controllers/systemChatwoot.js";
+import chatAgents from "./src/controllers/chatwoot/application/agentsAccount.js";
 import chatInbox from "./src/controllers/chatwoot/application/inboxes.js";
-import chatPlatformAcount from "./src/controllers/chatwoot/platform/acount.js";
+import chatPlatformAcount from "./src/controllers/chatwoot/platform/account.js";
 import usersPlatform from "./src/controllers/chatwoot/platform/users.js";
 import reports from "./src/controllers/chatwoot/reports/reports.js"
-
-import views from "./src/controllers/views/pagesView.js";
+import views from "./src/controllers/views/pagesView.js"; // paginas frontend
 
 const routes = express.Router();
   	
 //rota de configuraçoes globais 
-routes.post("/global_configs", auth.hasPermission('root'), globalConfigs.addAcoutConfigs);
-routes.get('/global_configs/:config_id', auth.hasPermission('root'),  globalConfigs.getGlobalConfigs);
-routes.post("/global_configs/chatwoot", auth.hasPermission('funcionario'), globalConfigs.addUserChatwootConfigs);
+routes.post("/global_configs", auth.hasPermission('root'), systemChatwootConfig.addChatwootSystemConfig);
+routes.get('/global_configs/:config_id', auth.hasPermission('root'),  systemChatwootConfig.getGlobalSytemChatwoot);
+//rotas de configuraçao do usuario
+routes.post("/global_configs/chatwoot", auth.hasPermission('funcionario'), globalConfigs.addUserChatwootConfig);
 
 //rotas platform chatwoot accouts
 routes.post("/chat/platform/accouts", auth.hasPermission('funcionario'), chatPlatformAcount.createAccount);//cria uma caixa de entrada
@@ -79,8 +80,8 @@ routes.get("/teste", auth.hasPermission('cliente'), (req, res) => {
 //rotas de viwes
 routes.get('/home', views.homeView);//home
 routes.get('/login', views.loginView);
-routes.get('/dashboard',views.dashboardView);
-routes.get('/cadastro',views.cadasroView);//teste
+routes.get('/dashboard', views.dashboardView);
+routes.get('/cadastro', views.cadasroView);//teste
 routes.get('/new_user', views.testeView);//teste alterar nomes
 
 

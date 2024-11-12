@@ -1,8 +1,8 @@
-import GetAcoutConfigs from './../../../controllers/acoutConfigs.js';
+import systemChatwootConfig from '../../systemChatwoot.js';
 
 //accounts
 async function createAccount(req, res) {//cria uma conta (Create an Account)
-    const dados = GetAcoutConfigs.getAcoutConfigs(req.body.id); //coleta os dados globais da conta
+    const dados = systemChatwootConfig.getChatwootSystemConfig(req.body.id); //coleta os dados globais da conta
 
     const name_account = req.body.name_account;
     const url = `${dados.chatwoot_url}/platform/api/v1/accounts`;
@@ -36,8 +36,7 @@ async function createAccount(req, res) {//cria uma conta (Create an Account)
 }
 
 async function patchAccount(req, res) {
-
-    const dados = GetAcoutConfigs.getAcoutConfigs(req.body.id); //coleta os dados globais da conta
+    const dados = systemChatwootConfig.getChatwootSystemConfig(req.body.id); //coleta os dados globais da conta
 
     const id_account = req.params.id_account;
     const name_account = req.body.name_account;
@@ -74,7 +73,7 @@ async function patchAccount(req, res) {
 
 //account users
 async function addUserAccount(req, res) {//adiciona um usuario a uma conta  (Create an Account User)
-    const dados = GetAcoutConfigs.getAcoutConfigs(req.body.id); //coleta os dados globais da conta
+    const dados = systemChatwootConfig.getChatwootSystemConfig(req.body.id); //coleta os dados globais da conta
     const id_account = req.params.id_account;
 
     const url = `${dados.chatwoot_url}/platform/api/v1/accounts/${id_account}/account_users`;
@@ -108,7 +107,7 @@ async function addUserAccount(req, res) {//adiciona um usuario a uma conta  (Cre
 }
 
 async function deleteUserAccount(req, res) {//Delete an Account User
-    const dados = GetAcoutConfigs.getAcoutConfigs(req.body.id); //coleta os dados globais da conta
+    const dados = systemChatwootConfig.getChatwootSystemConfig(req.body.id); //coleta os dados globais da conta
     const id_account = req.params.id_account;
 
     const url = `${dados.chatwoot_url}/platform/api/v1/accounts/${id_account}/account_users`;
@@ -141,7 +140,7 @@ async function deleteUserAccount(req, res) {//Delete an Account User
 }
 
 async function getAllUserAccount(req, res) {//get acout detail
-    const dados = GetAcoutConfigs.getAcoutConfigs(req.body.id); //coleta os dados globais da conta
+    const dados = systemChatwootConfig.getChatwootSystemConfig(req.body.id); //coleta os dados globais da conta
     const id_account = req.params.id_account;
     const url = `${dados.chatwoot_url}/platform/api/v1/accounts/${id_account}/account_users`;
     const platform_api_key = dados.chatwoot_platform_api_key;

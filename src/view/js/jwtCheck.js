@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (dadosSalvos) {
         console.log("token salvo na memoria", dadosSalvos);//teste
-        fetch('/teste', {
+        //const backendUrl ="http://127.0.0.1:5000";
+        const backendUrl ="https://sphnx.tec.br";
+        fetch(`${backendUrl}/teste`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${dadosSalvos}`  // Passa o token no cabeçalho como Bearer

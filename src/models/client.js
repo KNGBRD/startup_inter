@@ -29,7 +29,18 @@ export default db.define("client", {
     foreginKey: true,
     comment: "id do usuario que cadastrou o cliente",
   },
-  
+  system_chatwoot_config_id: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    foreginKey: true,
+    comment: "id do sistema chatwoot",
+  },
+  system_evolution_config_id: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    foreginKey: true,
+    comment: "id do sistema evolution",
+  }
 });
 
 //verificar uso de client e a chamada dele para definir as relaçoes

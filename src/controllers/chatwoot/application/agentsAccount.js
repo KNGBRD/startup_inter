@@ -1,40 +1,8 @@
-import ChatWootUserConfigs from './../../acoutConfigs.js';
+import ChatWootUserConfigs from '../../accoutConfigs.js';
 
-// async function listAgentsInAccout(req, res) {
-//     const chatwootData = await ChatWootUserConfigs.getUserConfigs(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
-//     //get agents in account
-//     const id_account = req.params.id_account;
-//     const url = `${chatwootData.url_chatwoot}/api/v1/accounts/${id_account}/agents`;
-//     console.log(url);//teste
-
-//     const user_api_key =req.headers.user_token;
-//     if (!user_api_key) return res.status(401).json({error: 'Token de usuario não informado!'});
-//     if (!id_account) return res.status(400).json({error: 'Id da conta não informado!'});
-
-//     try {
-//         const response = await fetch(url, {
-//             method: 'GET',
-//             headers: {
-//                 'Content-Type': 'application/json; charset=utf-8',
-//                 'api_access_token': user_api_key
-//             }
-//         });
-
-//         if (!response.ok) {
-//             console.log(response.status);//teste
-//             throw new Error(`HTTP error! status: ${response.status}`);
-//         }
-//         const data = await response.json();     
-//         console.log(data);//teste
-//         return res.status(200).json(data);//verificar o que vai passar no futuro
-//     } catch (error) {
-//         console.error(`Erro ao fazer a requisição: ${error}`);
-//         return res.status(500).json({error: error});
-//     }
-// }
 
 async function listAgentsInAccout(req, res) {
-    const chatwootData = await ChatWootUserConfigs.getUserConfigs(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
+    const chatwootData = await ChatWootUserConfigs.getUserConfig(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
     //get agents in account
     const id_account = chatwootData.id_account_chatwoot;
     const url = `${chatwootData.url_chatwoot}/api/v1/accounts/${id_account}/agents`;
@@ -63,7 +31,7 @@ async function listAgentsInAccout(req, res) {
 }
 
 async function addNewAgent(req, res) {
-    const chatwootData = await ChatWootUserConfigs.getUserConfigs(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
+    const chatwootData = await ChatWootUserConfigs.getUserConfig(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
     //POST add new agent in account
     const id_account = chatwootData.id_account_chatwoot;
     const url = `${chatwootData.url_chatwoot}/api/v1/accounts/${id_account}/agents`;
@@ -107,7 +75,7 @@ async function addNewAgent(req, res) {
 
 async function updateAgent(req, res) {
     //PATCH update agent in account
-    const chatwootData = await ChatWootUserConfigs.getUserConfigs(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
+    const chatwootData = await ChatWootUserConfigs.getUserConfig(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
     const id_account = chatwootData.id_account_chatwoot;
     const id_agent = req.params.id_agent;// id of agent updated
     const url = `${chatwootData.url_chatwoot}/api/v1/accounts/${id_account}/agents/${id_agent}`;
@@ -154,7 +122,7 @@ async function updateAgent(req, res) {
 
 async function deleteAgent(req, res) {
     //DELETE delete agent in account
-    const chatwootData = await ChatWootUserConfigs.getUserConfigs(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
+    const chatwootData = await ChatWootUserConfigs.getUserConfig(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
     const id_account = chatwootData.id_account_chatwoot;
     const id_agent = req.params.id_agent;// id of agent deleted
     const url = `${chatwootData.url_chatwoot}/api/v1/accounts/${id_account}/agents/${id_agent}`;

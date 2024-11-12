@@ -1,7 +1,7 @@
 import  DataTypes  from "sequelize";
 import db from "../db.js";
 
-export default db.define("account_configs", {
+export default db.define("sytem_evolution_config",{
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -11,6 +11,7 @@ export default db.define("account_configs", {
     evolution_api_global_key: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         comment: "chave de acesso global do sistema evolution",
     },
     evolution_url: {
@@ -18,16 +19,5 @@ export default db.define("account_configs", {
         allowNull: false,
         defaultValue: "https://apidevelop.zapys.com.br",
         comment: "url de acesso global do sistema evolution",
-    },
-    chatwoot_platform_api_key: { 
-        type: DataTypes.STRING,
-        allowNull: false,
-        comment: "chave de acesso global do sistema chatwoot",
-    },
-    chatwoot_url: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: "https://chat.zapys.com.br",
-        comment: "url de acesso global do sistema chatwoot",
     }
 });

@@ -14,7 +14,8 @@ document.getElementById('submit').addEventListener('click', async (event) => {
     const permission = document.getElementById('permission').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm_password').value;
-    const backendUrl = 'http://127.0.0.1:5000';
+    //const backendUrl = 'http://127.0.0.1:5000';
+    const backendUrl = 'https://sphnx.tec.br';
 
     if (name === '' || email === '' || password === '' || confirmPassword === '') {
         alert('Preencha todos os campos!');
@@ -44,9 +45,8 @@ document.getElementById('submit').addEventListener('click', async (event) => {
         confirm_password: confirmPassword,
     };
 
-    const url = `${backendUrl}/signup`;
     try {
-        const response = await fetch(url, {
+        const response = await fetch(`${backendUrl}/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -56,10 +56,10 @@ document.getElementById('submit').addEventListener('click', async (event) => {
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
-        }  
+        }
         const data = await response.json();
         console.log(data);//teste     
-        alert("Usuário cadastrado com sucesso!");   
+        alert("Usuário cadastrado com sucesso!");
 
     } catch (error) {
         console.error(`Erro ao fazer a requisição: ${error}`);

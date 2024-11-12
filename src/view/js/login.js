@@ -1,4 +1,5 @@
-var backend = 'http://127.0.0.1:5000';
+//var backend = 'http://127.0.0.1:5000';
+var backend = 'https://sphnx.tec.br';
 document.getElementById('loginButton').addEventListener('click', async (event) => {
     event.preventDefault();
     // Coleta os valores dos campos de e-mail e senha
@@ -24,9 +25,8 @@ document.getElementById('loginButton').addEventListener('click', async (event) =
     console.log("e-mail e senha coletados : ", dataBody);
     // Envia a requisição POST
 
-    const url = `${backend}/login`;
     try {
-        const response = await fetch(url, {
+        const response = await fetch(`${backend}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ document.getElementById('loginButton').addEventListener('click', async (event) =
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
-        }  
+        }
 
         const data = await response.json();
         //console.log(data);//teste
@@ -45,9 +45,9 @@ document.getElementById('loginButton').addEventListener('click', async (event) =
         // Recupera os dados do Local Storage
         const dadosSalvos = localStorage.getItem('userDataToken');
         console.log("dados salvos no local storage: ", dadosSalvos);
-        
+
         setTimeout(() => {//redireciona para a pagina de dashboard com atraso de 1 segundo
-            window.location.href = '/dashboard'; 
+            window.location.href = '/dashboard';
         }, 1000); // Redireciona após 1 segundo
 
     } catch (error) {

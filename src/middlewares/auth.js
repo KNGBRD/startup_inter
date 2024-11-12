@@ -9,7 +9,7 @@ function authlogin(req, res){
         console.log('falta token A!'); // teste       
         return res.status(401).json({
             erro: true,
-            mensagem: "Erro: Necessário realizar o login para acessar a página! Faltam o token A!"                
+            mensagem: "Erro: Necessário realizar o login para acessar a página!"                
         });
     }
     const [, token ]= authHeader.split(' ');        
@@ -17,7 +17,7 @@ function authlogin(req, res){
         console.log('falta token B!'); //teste
         return res.status(401).json({ 
             erro: true,
-            mensagem: "Erro: Necessário realizar o login para acessar a página! Faltam o token B!"
+            mensagem: "Erro: Necessário realizar o login para acessar a página!"
         });
     }
 

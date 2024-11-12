@@ -1,7 +1,7 @@
-import ChatWootUserConfigs from './../../../controllers/acoutConfigs.js';
+import ChatWootUserConfigs from '../../accoutConfigs.js';
 
 async function listAllInbox(req, res) {
-    const chatwootData = await ChatWootUserConfigs.getUserConfigs(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
+    const chatwootData = await ChatWootUserConfigs.getUserConfig(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
 
     const url = `${chatwootData.url_chatwoot}/api/v1/accounts/${chatwootData.id_account_chatwoot}/inboxes`;
     console.log(url);//teste
@@ -30,7 +30,7 @@ async function listAllInbox(req, res) {
 }
 
 async function getAnInbox(req, res) {  //GET lista uma caixa de entrada específica
-    const chatwootData = await ChatWootUserConfigs.getUserConfigs(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
+    const chatwootData = await ChatWootUserConfigs.getUserConfig(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
     //const id_account = !req.params.id_account ? chatwootData.id_account_chatwoot : req.params.id_account; //verifica se foi passado o id da conta(para funcionario)
     const id_account = chatwootData.id_account_chatwoot;
     const id_inbox = req.params.id_inbox;
@@ -63,7 +63,7 @@ async function getAnInbox(req, res) {  //GET lista uma caixa de entrada específ
 }
 
 async function listAgentInbox(req, res) {  //GET lista agentes de uma caixa de entrada
-    const chatwootData = await ChatWootUserConfigs.getUserConfigs(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
+    const chatwootData = await ChatWootUserConfigs.getUserConfig(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
     const id_account = chatwootData.id_account_chatwoot;
     const id_inbox = req.params.id_inbox;
     const user_api_key = chatwootData.user_chatwoot_token;
@@ -95,7 +95,7 @@ async function listAgentInbox(req, res) {  //GET lista agentes de uma caixa de e
 }
 
 async function addAgentInbox(req, res) {  //POST add agent in inbox
-    const chatwootData = await ChatWootUserConfigs.getUserConfigs(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
+    const chatwootData = await ChatWootUserConfigs.getUserConfig(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
 
     const id_account = chatwootData.id_account_chatwoot;
     const user_api_key = chatwootData.user_chatwoot_token;
@@ -135,7 +135,7 @@ async function addAgentInbox(req, res) {  //POST add agent in inbox
 }
 
 async function deleteAgentInbox(req, res) {
-    const chatwootData = await ChatWootUserConfigs.getUserConfigs(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
+    const chatwootData = await ChatWootUserConfigs.getUserConfig(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
     const id_account = chatwootData.id_account_chatwoot;
     const user_api_key = chatwootData.user_chatwoot_token;
     const id_inbox = req.params.id_inbox;
@@ -174,7 +174,7 @@ async function deleteAgentInbox(req, res) {
 }
 
 async function createInbox(req, res) {
-    const chatwootData = await ChatWootUserConfigs.getUserConfigs(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
+    const chatwootData = await ChatWootUserConfigs.getUserConfig(req.body.id); // Busca informações do chatwoot do usuário no banco de dados
     const id_account = chatwootData.id_account_chatwoot;
     const user_api_key = chatwootData.user_chatwoot_token;
 
