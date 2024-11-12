@@ -15,7 +15,7 @@ document.getElementById('submit').addEventListener('click', async (event) => {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm_password').value;
     //const backendUrl = 'http://127.0.0.1:5000';
-    const backendUrl = 'https://sphnx.tec.br';
+    const backendUrl = 'https://sphynx.tec.br';
 
     if (name === '' || email === '' || password === '' || confirmPassword === '') {
         alert('Preencha todos os campos!');

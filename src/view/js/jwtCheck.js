@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (dadosSalvos) {
         console.log("token salvo na memoria", dadosSalvos);//teste
         //const backendUrl ="http://127.0.0.1:5000";
-        const backendUrl ="https://sphnx.tec.br";
+        const backendUrl ="https://sphynx.tec.br";
         fetch(`${backendUrl}/teste`, {
             method: 'GET',
             headers: {

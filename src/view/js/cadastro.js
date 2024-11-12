@@ -6,7 +6,7 @@ document.getElementById("submit").addEventListener('click', async (event) => {
     var chatwoot_url = document.getElementById("chatwoot_url").value;
     var user_email = document.getElementById("email").value;
     //const backendUrl ="http://127.0.0.1:5000/global_configs/chatwoot";
-    const backendUrl ="https://sphnx.tec.br/global_configs/chatwoot";
+    const backendUrl ="https://sphynx.tec.br/global_configs/chatwoot";
 
     if (account_id == "" || user_token == "" || chatwoot_url == "" || user_email == "") {
         alert("Preencha todos os campos!");

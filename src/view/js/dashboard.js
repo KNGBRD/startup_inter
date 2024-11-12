@@ -27,7 +27,7 @@ async function getAcountReportSumary(since, until) {
 
     try {
         //const backendUrl ="http://127.0.0.1:5000";
-        const backendUrl ="https://sphnx.tec.br"; //produçao
+        const backendUrl ="https://sphynx.tec.br"; //produçao
         const response = await fetch(`${backendUrl}/reports/conversations/account/${since}/${until}`, {
             method: 'GET',
             headers: {
@@ -46,7 +46,7 @@ async function getAcountReportSumaryInterval(since, until) {
 
     try {
         //const backendUrl ="http://127.0.0.1:5000"; 
-        const backendUrl ="https://sphnx.tec.br";
+        const backendUrl ="https://sphynx.tec.br";
         const response = await fetch(`${backendUrl}/reports/summary/account/${since}/${until}`, {
             method: 'GET',
             headers: {

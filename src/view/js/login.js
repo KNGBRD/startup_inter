@@ -1,5 +1,5 @@
 //var backend = 'http://127.0.0.1:5000';
-var backend = 'https://sphnx.tec.br';
+var backend = 'https://sphynx.tec.br';
 document.getElementById('loginButton').addEventListener('click', async (event) => {
     event.preventDefault();
     // Coleta os valores dos campos de e-mail e senha
